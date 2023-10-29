@@ -4,16 +4,16 @@ from pygame import Vector2
 
 from ball import Ball
 
-ball = Ball(resolution=10, radius=100)
+ball = Ball(resolution=BALL_RESOLUTION, radius=BALL_RADIUS)
 
 def simulate():
     ball.update(1/60)
-
+    
 
 def main():
     running = True
     mouse_position = Vector2(0,0)
-    mouse_is_down = False
+    mouse_is_down = True
 
     while running:
         for event in pygame.event.get():
@@ -38,6 +38,8 @@ def main():
             for vertex in ball.vertices:
                 if MOVE_SETTING == Positioning.MOVE_ALL_VERTICES:
                     vertex.position = mouse_position + vertex.original_position
+                    vertex.velocity = Vector2()
+                    ball.velocity = Vector2()
                 elif MOVE_SETTING == Positioning.APPLY_VELOCITY:
                     vertex.velocity += (mouse_position - vertex.position) / 10
 
@@ -50,7 +52,7 @@ def main():
         simulate()
         pygame.display.flip()
         
-        clock.tick(60)
+        clock.tick(TICK)
     pygame.quit()
 
 if __name__ == "__main__":

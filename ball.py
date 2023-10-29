@@ -10,13 +10,18 @@ class Ball(PhysicsBody):
         self.resolution = resolution
         vertices = []
 
+        self.mass = BALL_MASS
+        vertex_count: float = resolution
+
         for i in range(0, resolution):    
             ang = i*2*math.pi/resolution - math.pi/2
             x = radius*math.cos(ang)
             y = -radius*math.sin(ang)
 
             position = Vector2(x, y)
-            point = Vertex(position)
-            vertices.append(point)
+            vertex = Vertex(position)
+            vertex.mass = self.mass / vertex_count
+            
+            vertices.append(vertex)
 
         super().__init__(vertices)
