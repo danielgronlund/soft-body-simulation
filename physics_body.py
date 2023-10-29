@@ -21,7 +21,6 @@ class PhysicsBody:
         self.pressure = 1.0 - calculate_area(self.vertices) / self.area
         self.position = calculate_center(self.vertices)
         
-        i = 0
         for vertex in self.vertices:
             vertex.force = Vector2()
 
@@ -46,8 +45,6 @@ class PhysicsBody:
 
             if DEBUG_DRAW_FORCES:
                 pygame.draw.line(screen, (255, 0, 0), vertex.position, vertex.position + vertex.velocity)
-
-            i += 1
 
         self.position += self.velocity
 
